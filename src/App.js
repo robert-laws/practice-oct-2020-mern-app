@@ -6,18 +6,22 @@ import {
   Redirect,
 } from 'react-router-dom';
 import './App.scss';
-import { Navigation } from './layout';
-import { Equipment, Home } from './pages';
+import { Footer, Navigation } from './layout';
+import { EquipmentList, EquipmentDetail, Home } from './pages';
 
 const App = () => {
   return (
     <Router>
       <Navigation />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/equipment' component={Equipment} />
-        <Redirect to='/' />
-      </Switch>
+      <section className='section' style={{ flex: '1' }}>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/equipment' component={EquipmentList} />
+          <Route exact path='/equipment/:id' component={EquipmentDetail} />
+          <Redirect to='/' />
+        </Switch>
+      </section>
+      <Footer />
     </Router>
   );
 };

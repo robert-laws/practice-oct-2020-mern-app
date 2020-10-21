@@ -2,7 +2,7 @@ import React from 'react';
 import EquipmentData from '../data/equipment';
 import { HeadingText, List } from '../components';
 
-export const Equipment = () => {
+export const EquipmentList = () => {
   const data = EquipmentData;
 
   return (

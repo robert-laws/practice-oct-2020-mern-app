@@ -11,7 +11,11 @@ export const Navigation = () => {
     >
       <div className='navbar-brand'>
         <Link to='/' className='navbar-item'>
-          <img src={Logo} alt='Tech Menu Logo' style={{ maxHeight: '70px' }} />
+          <img
+            src={Logo}
+            alt='Tech Menu Logo'
+            style={{ maxHeight: '70px', flex: '0' }}
+          />
         </Link>
       </div>
       <div className='navbar-menu'>
