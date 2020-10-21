@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import EquipmentData from '../data/equipment';
 import { HeadingText } from '../components';
 
-export const EquipmentList = () => {
+export const Equipment = () => {
   const { group } = useParams();
 
   const data = EquipmentData;

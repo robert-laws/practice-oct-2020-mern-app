@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 import './App.scss';
 import { Footer, Navigation } from './layout';
-import { EquipmentList, Home } from './pages';
-import { Detail } from './components';
+import { Equipment, Home } from './pages';
+import { Detail, List } from './components';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
       <section className='section' style={{ flex: '1' }}>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/:group' component={EquipmentList} />
+          <Route exact path='/:group' component={List} />
           <Route exact path='/:group/:id' component={Detail} />
           <Redirect to='/' />
         </Switch>

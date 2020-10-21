@@ -1,3 +1,2 @@
 export { Home } from './Home';
-export { EquipmentList } from './EquipmentList';
-export { EquipmentDetail } from './EquipmentDetail';
+export { Equipment } from './Equipment';
