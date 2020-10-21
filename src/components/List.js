@@ -1,11 +1,5 @@
 import React from 'react';
 
-export const List = ({ data }) => {
-  return (
-    <ul>
-      {data.map((item) => (
-        <li key={item.id}>{item.title}</li>
-      ))}
-    </ul>
-  );
+export const List = ({ data, RenderComponent }) => {
+  return <div>Detail</div>;
 };

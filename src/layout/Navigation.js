@@ -21,7 +21,8 @@ export const Navigation = () => {
       <div className='navbar-menu'>
         <div className='navbar-start'>
           <NavLink
-            to='equipment'
+            exact
+            to='/equipment'
             className='navbar-item'
             activeClassName='is-active'
           >
