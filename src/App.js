@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.scss';
 import { Footer, Navigation } from './layout';
-import { Equipment, Home } from './pages';
+import { Home } from './pages';
 import { Detail, List } from './components';
 
 const App = () => {

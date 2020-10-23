@@ -1,13 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import EquipmentData from '../data/equipment';
+import Data from '../data/allData';
 import { HeadingText } from '../components';
 
 export const Equipment = () => {
   const { group } = useParams();
 
-  const data = EquipmentData;
+  const data = Data;
 
   return (
     <section className='section'>
