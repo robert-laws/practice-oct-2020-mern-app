@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../images/logo.svg';
 
 export const Navigation = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const showMobile = () => {
+    setToggle((prev) => !prev);
+  };
+
   return (
     <nav
       className='navbar has-shadow is-white'
@@ -11,14 +17,16 @@ export const Navigation = () => {
     >
       <div className='navbar-brand'>
         <Link to='/' className='navbar-item'>
-          <img
-            src={Logo}
-            alt='Tech Menu Logo'
-            style={{ maxHeight: '70px', flex: '0' }}
-          />
+          <img src={Logo} alt='Tech Menu Logo' style={{ flex: '0' }} />
         </Link>
+        {/* eslint-disable-next-line */}
+        <a className='navbar-burger' onClick={showMobile}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
       </div>
-      <div className='navbar-menu'>
+      <div className={`navbar-menu ${toggle ? ' is-active' : ''}`}>
         <div className='navbar-start'>
           <NavLink
             exact
