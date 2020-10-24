@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { HeadingText } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
 import { checkGroupNameMatch } from '../util/utilities';
+import { ListItem } from './ListItem';
 
 export const List = () => {
   let history = useHistory();
@@ -42,9 +42,7 @@ export const List = () => {
       <HeadingText text={group.toUpperCase()} />
       {groupData &&
         groupData.map((item) => (
-          <Link key={item.id} to={`/${group}/${item.id}`}>
-            <p>{item.title}</p>
-          </Link>
+          <ListItem key={item.id} group={group} item={item} />
         ))}
     </div>
   );
