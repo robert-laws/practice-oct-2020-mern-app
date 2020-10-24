@@ -1,10 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { HeadingText } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
 
 export const List = () => {
+  let history = useHistory();
+
   const { group } = useParams();
 
   const [equipment, setEquipment] = useState(null);
@@ -12,6 +14,14 @@ export const List = () => {
 
   const technologyContext = useContext(TechnologyContext);
   const { technologyData } = technologyContext;
+
+  useEffect(() => {
+    if (group) {
+      if (group !== 'equipment' && group !== 'software') {
+        history.push('/');
+      }
+    }
+  }, [group, history]);
 
   useEffect(() => {
     if (technologyData && group) {
