@@ -30,6 +30,12 @@ const data = [
     title: 'iMovie',
     description: 'Apple software used to create videos',
   },
+  {
+    id: 6,
+    group: 'learning',
+    title: 'LinkedIn Learning',
+    description: 'Thousands of video tutorials on software and other skills',
+  },
 ];
 
 export default data;

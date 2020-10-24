@@ -1,18 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { checkGroupNameMatch } from '../util/utilities';
+import TechnologyContext from '../context/technology/technologyContext';
+import { HeadingText } from '../components';
 
 export const Detail = () => {
+  let history = useHistory();
+
   const { group, id } = useParams();
 
-  // const [itemData, setItemData] = useState(null);
+  const [detailData, setDetailData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setItemData(getFunction(id));
-  // }, []);
+  const technologyContext = useContext(TechnologyContext);
+  const { technologyData } = technologyContext;
+
+  useEffect(() => {
+    if (group) {
+      if (checkGroupNameMatch(group)) {
+        history.push('/');
+      }
+    }
+  }, [group, history]);
+
+  useEffect(() => {
+    if (technologyData && group && id) {
+      const data = technologyData.find((item) => {
+        return item.id.toString() === id;
+      });
+
+      setDetailData(data);
+      setLoading(false);
+    }
+  }, [technologyData, group, id]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      Detail: {group}: {id}
+    <div className='container'>
+      <HeadingText text={detailData.title.toUpperCase()} />
+      <p>{detailData.description}</p>
     </div>
   );
 };

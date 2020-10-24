@@ -3,13 +3,14 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { HeadingText } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
+import { checkGroupNameMatch } from '../util/utilities';
 
 export const List = () => {
   let history = useHistory();
 
   const { group } = useParams();
 
-  const [equipment, setEquipment] = useState(null);
+  const [groupData, setGroupData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const technologyContext = useContext(TechnologyContext);
@@ -17,7 +18,7 @@ export const List = () => {
 
   useEffect(() => {
     if (group) {
-      if (group !== 'equipment' && group !== 'software') {
+      if (checkGroupNameMatch(group)) {
         history.push('/');
       }
     }
@@ -27,7 +28,7 @@ export const List = () => {
     if (technologyData && group) {
       const data = technologyData.filter((item) => item.group === group);
 
-      setEquipment(data);
+      setGroupData(data);
       setLoading(false);
     }
   }, [technologyData, group]);
@@ -37,16 +38,14 @@ export const List = () => {
   }
 
   return (
-    <section className='section'>
-      <div className='container'>
-        <HeadingText text={group.toUpperCase()} />
-        {equipment &&
-          equipment.map((item) => (
-            <Link key={item.id} to={`/${group}/${item.id}`}>
-              <p>{item.title}</p>
-            </Link>
-          ))}
-      </div>
-    </section>
+    <div className='container'>
+      <HeadingText text={group.toUpperCase()} />
+      {groupData &&
+        groupData.map((item) => (
+          <Link key={item.id} to={`/${group}/${item.id}`}>
+            <p>{item.title}</p>
+          </Link>
+        ))}
+    </div>
   );
 };

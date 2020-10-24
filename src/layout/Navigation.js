@@ -28,6 +28,22 @@ export const Navigation = () => {
           >
             Equipment
           </NavLink>
+          <NavLink
+            exact
+            to='/software'
+            className='navbar-item'
+            activeClassName='is-active'
+          >
+            Software
+          </NavLink>
+          <NavLink
+            exact
+            to='/learning'
+            className='navbar-item'
+            activeClassName='is-active'
+          >
+            Learning
+          </NavLink>
         </div>
       </div>
     </nav>
