@@ -1,4 +1,4 @@
-const Data = [
+const data = [
   {
     id: 1,
     group: 'equipment',
@@ -18,6 +18,18 @@ const Data = [
     description:
       'Read pre-loaded e-books on academic and pleasure reading topics',
   },
+  {
+    id: 4,
+    group: 'equipment',
+    title: 'Apple AV Connector',
+    description: 'Connect iPad and Mac Computer to AV devices',
+  },
+  {
+    id: 5,
+    group: 'software',
+    title: 'iMovie',
+    description: 'Apple software used to create videos',
+  },
 ];
 
-export default Data;
+export default data;

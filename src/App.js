@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,8 +9,16 @@ import './App.scss';
 import { Footer, Navigation } from './layout';
 import { Home } from './pages';
 import { Detail, List } from './components';
+import TechnologyContext from './context/technology/technologyContext';
 
 const App = () => {
+  const technologyContext = useContext(TechnologyContext);
+  const { getAllTechnologyData } = technologyContext;
+
+  useEffect(() => {
+    getAllTechnologyData();
+  }, [getAllTechnologyData]);
+
   return (
     <Router>
       <Navigation />
