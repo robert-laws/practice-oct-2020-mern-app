@@ -26,7 +26,7 @@ export const Navigation = () => {
           <span></span>
         </a>
       </div>
-      <div className={`navbar-menu ${toggle ? ' is-active' : ''}`}>
+      <div className={`navbar-menu ${toggle && ' is-active'}`}>
         <div className='navbar-start'>
           <NavLink
             exact

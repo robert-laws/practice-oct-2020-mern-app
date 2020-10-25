@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { HeadingText } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
 import { checkGroupNameMatch } from '../util/utilities';
-import { ListItem } from './ListItem';
+import { ListItem } from './';
 
 export const List = () => {
   let history = useHistory();
