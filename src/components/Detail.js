@@ -26,13 +26,21 @@ export const Detail = () => {
   useEffect(() => {
     if (technologyData && group && id) {
       const data = technologyData.find((item) => {
-        return item.id.toString() === id;
+        if (item.group === group) {
+          return item.id.toString() === id;
+        } else {
+          return undefined;
+        }
       });
+
+      if (data === undefined) {
+        history.push('/');
+      }
 
       setDetailData(data);
       setLoading(false);
     }
-  }, [technologyData, group, id]);
+  }, [technologyData, group, id, history]);
 
   if (loading) {
     return <p>Loading...</p>;
