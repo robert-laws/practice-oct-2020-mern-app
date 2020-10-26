@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback } from 'react';
-import { Button, HeadingText, Input } from '../components';
+import { Button, HeadingText, Input, Select } from '../components';
 import { validatorMinLength, validatorRequire } from '../util/utilities';
 
 const formReducer = (state, action) => {
@@ -45,7 +45,7 @@ export const AddItem = () => {
     isValid: false,
   });
 
-  const inputHandler = useCallback((id, value, isValid) => {
+  const handleInput = useCallback((id, value, isValid) => {
     dispatch({
       type: 'INPUT_CHANGE',
       value: value,
@@ -54,11 +54,17 @@ export const AddItem = () => {
     });
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(state.inputs);
+  };
+
   return (
     <div className='container'>
       <HeadingText text='Add a New Item' />
       <hr />
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           id='title'
           label='Title'
@@ -66,7 +72,7 @@ export const AddItem = () => {
           placeholder='Add a title'
           validators={[validatorRequire()]}
           errorText='Please enter a valid title.'
-          onInput={inputHandler}
+          onInput={handleInput}
         />
         <Input
           id='description'
@@ -75,7 +81,16 @@ export const AddItem = () => {
           placeholder='Add a description'
           validators={[validatorMinLength(5), validatorRequire()]}
           errorText='Please enter a valid description (at least 5 characters).'
-          onInput={inputHandler}
+          onInput={handleInput}
+        />
+        <Select
+          id='group'
+          label='Group'
+          selectText='Select a Group'
+          options={['equipment', 'software', 'learning']}
+          validators={[validatorRequire()]}
+          errorText='make a selection'
+          onInput={handleInput}
         />
         <Button color='primary' type='submit' disabled={!state.isValid}>
           Add New Item
