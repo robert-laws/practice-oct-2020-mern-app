@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeadingText, Input } from '../components';
+import { validatorRequire } from '../util/utilities';
 
 export const AddItem = () => {
   return (
@@ -11,7 +12,7 @@ export const AddItem = () => {
         label='Title'
         element='input'
         placeholder='Add a title'
-        validators={[]}
+        validators={[validatorRequire()]}
         errorText='Please enter a valid title'
       />
     </div>

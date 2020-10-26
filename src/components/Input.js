@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { validate } from '../util/utilities';
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -6,7 +7,13 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.payload,
-        isValid: true,
+        isValid: validate(action.payload, action.validators),
+      };
+
+    case 'BLUR':
+      return {
+        ...state,
+        isTouched: true,
       };
 
     default:
@@ -25,22 +32,28 @@ export const Input = ({
 }) => {
   const [state, dispatch] = useReducer(inputReducer, {
     value: '',
+    isTouched: false,
     isValid: false,
   });
 
   const handleChange = (event) => {
-    dispatch({ type: 'CHANGE', payload: event.target.value });
+    dispatch({ type: 'CHANGE', payload: event.target.value, validators });
+  };
+
+  const handleBlur = () => {
+    dispatch({ type: 'BLUR' });
   };
 
   const formElement =
     element === 'input' ? (
       <input
         id={id}
-        className={`input ${!state.isValid && 'is-danger'}`}
+        className={`input ${!state.isValid && state.isTouched && 'is-danger'}`}
         type='text'
         placeholder={placeholder}
-        value={state.value}
         onChange={handleChange}
+        onBlur={handleBlur}
+        value={state.value}
       />
     ) : (
       <textarea
@@ -48,8 +61,9 @@ export const Input = ({
         className={`textarea`}
         rows={rows || 3}
         placeholder={placeholder}
-        value={state.value}
         onChange={handleChange}
+        onBlur={handleBlur}
+        value={state.value}
       />
     );
 
@@ -59,7 +73,7 @@ export const Input = ({
         {label}
       </label>
       <div className='control'>{formElement}</div>
-      {!state.isValid && (
+      {!state.isValid && state.isTouched && (
         <span className='is-size-6 has-text-danger ml-1'>{errorText}</span>
       )}
     </div>
