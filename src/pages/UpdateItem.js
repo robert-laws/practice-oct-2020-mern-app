@@ -6,8 +6,6 @@ import { validatorRequire } from '../util/utilities';
 import { useForm } from '../hooks/form';
 
 export const UpdateItem = () => {
-  // let history = useHistory();
-
   const technologyContext = useContext(TechnologyContext);
   const { technologyData } = technologyContext;
 
@@ -85,15 +83,10 @@ export const UpdateItem = () => {
     <div className='container'>
       <HeadingText text='Update Item' />
       <hr />
-      <h5>{detailData.title}</h5>
-      <p>{detailData.group}</p>
-      <p>{detailData.description}</p>
-
-      <hr />
       <form onSubmit={handleSubmit}>
         <Input
           id='title'
-          label='title'
+          label='Title'
           element='input'
           placeholder='Add a title'
           validators={[validatorRequire()]}
@@ -105,7 +98,7 @@ export const UpdateItem = () => {
 
         <Input
           id='description'
-          label='description'
+          label='Description'
           placeholder='Add a description'
           validators={[validatorRequire()]}
           errorText='Please enter a valid description'
