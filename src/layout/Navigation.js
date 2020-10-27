@@ -54,6 +54,14 @@ export const Navigation = () => {
           </NavLink>
           <NavLink
             exact
+            to='/items'
+            className='navbar-item'
+            activeClassName='is-active'
+          >
+            All Items
+          </NavLink>
+          <NavLink
+            exact
             to='/items/new'
             className='navbar-item'
             activeClassName='is-active'
