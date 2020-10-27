@@ -1,38 +1,11 @@
-import React, { useReducer, useCallback } from 'react';
+import React from 'react';
 import { Button, HeadingText, Input, Select } from '../components';
 import { validatorMinLength, validatorRequire } from '../util/utilities';
-
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_CHANGE':
-      let formIsValid = true;
-      for (const inputId in state.inputs) {
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputId]: {
-            value: action.value,
-            isValid: action.isValid,
-          },
-        },
-        isValid: formIsValid,
-      };
-
-    default:
-      return state;
-  }
-};
+import { useForm } from '../hooks/form';
 
 export const AddItem = () => {
-  const [state, dispatch] = useReducer(formReducer, {
-    inputs: {
+  const [formState, inputHandler] = useForm(
+    {
       title: {
         value: '',
         isValid: false,
@@ -41,23 +14,18 @@ export const AddItem = () => {
         value: '',
         isValid: false,
       },
+      group: {
+        value: '',
+        isValid: false,
+      },
     },
-    isValid: false,
-  });
-
-  const handleInput = useCallback((id, value, isValid) => {
-    dispatch({
-      type: 'INPUT_CHANGE',
-      value: value,
-      isValid: isValid,
-      inputId: id,
-    });
-  }, []);
+    false
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(state.inputs);
+    console.log(formState.inputs);
   };
 
   return (
@@ -72,7 +40,7 @@ export const AddItem = () => {
           placeholder='Add a title'
           validators={[validatorRequire()]}
           errorText='Please enter a valid title.'
-          onInput={handleInput}
+          onInput={inputHandler}
         />
         <Input
           id='description'
@@ -81,7 +49,7 @@ export const AddItem = () => {
           placeholder='Add a description'
           validators={[validatorMinLength(5), validatorRequire()]}
           errorText='Please enter a valid description (at least 5 characters).'
-          onInput={handleInput}
+          onInput={inputHandler}
         />
         <Select
           id='group'
@@ -90,9 +58,9 @@ export const AddItem = () => {
           options={['equipment', 'software', 'learning']}
           validators={[validatorRequire()]}
           errorText='make a selection'
-          onInput={handleInput}
+          onInput={inputHandler}
         />
-        <Button color='primary' type='submit' disabled={!state.isValid}>
+        <Button color='primary' type='submit' disabled={!formState.isValid}>
           Add New Item
         </Button>
       </form>
