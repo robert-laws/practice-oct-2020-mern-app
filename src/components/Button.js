@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const Button = ({ children, color, disabled, type = 'button' }) => {
+export const Button = ({
+  children,
+  color = 'primary',
+  disabled = false,
+  type = 'button',
+  linkTo = '',
+}) => {
   const buttonColor = (color) => {
     switch (color) {
       case 'primary':
@@ -23,13 +30,26 @@ export const Button = ({ children, color, disabled, type = 'button' }) => {
     }
   };
 
-  return (
-    <button
-      type={type}
-      className={`button ${buttonColor(color)}`}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
+  const buttonElement =
+    linkTo === '' ? (
+      <button
+        type={type}
+        className={`button ${buttonColor(color)}`}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    ) : (
+      <Link to={linkTo}>
+        <button
+          type={type}
+          className={`button ${buttonColor(color)}`}
+          disabled={disabled}
+        >
+          {children}
+        </button>
+      </Link>
+    );
+
+  return buttonElement;
 };

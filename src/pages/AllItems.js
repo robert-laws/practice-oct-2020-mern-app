@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { HeadingText } from '../components';
+import { HeadingText, Button } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
 
 export const AllItems = () => {
@@ -15,7 +15,11 @@ export const AllItems = () => {
       <HeadingText text='All Items' />
       <hr />
       {technologyData &&
-        technologyData.map((item) => <div key={item.title}>{item.title}</div>)}
+        technologyData.map((item) => (
+          <div key={item.id}>
+            {item.title} <Button linkTo={`/items/${item.id}`}>Edit</Button>
+          </div>
+        ))}
     </div>
   );
 };
