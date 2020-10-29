@@ -53,35 +53,64 @@ export const Input = ({
     dispatch({ type: 'BLUR' });
   };
 
-  const formElement =
-    element === 'input' ? (
-      <input
-        id={id}
-        className={`input ${!isValid && isTouched && 'is-danger'}`}
-        type='text'
-        placeholder={placeholder}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-      />
-    ) : (
-      <textarea
-        id={id}
-        className={`textarea ${!isValid && isTouched && 'is-danger'}`}
-        rows={rows || 3}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-      />
-    );
+  const formType = (element) => {
+    if (element === 'textarea') {
+      return (
+        <textarea
+          id={id}
+          className={`textarea ${!isValid && isTouched && 'is-danger'}`}
+          rows={rows || 3}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+        />
+      );
+    } else if (element === 'password') {
+      return (
+        <input
+          id={id}
+          className={`input ${!isValid && isTouched && 'is-danger'}`}
+          type='password'
+          placeholder={placeholder}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+        />
+      );
+    } else if (element === 'text') {
+      return (
+        <input
+          id={id}
+          className={`input ${!isValid && isTouched && 'is-danger'}`}
+          type='text'
+          placeholder={placeholder}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+        />
+      );
+    } else {
+      return (
+        <input
+          id={id}
+          className={`input ${!isValid && isTouched && 'is-danger'}`}
+          type='text'
+          placeholder={placeholder}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+        />
+      );
+    }
+  };
 
   return (
     <div className='field'>
       <label htmlFor={id} className='label'>
         {label}
       </label>
-      <div className='control'>{formElement}</div>
+      <div className='control'>{formType(element)}</div>
       {!isValid && isTouched && (
         <span className='is-size-6 has-text-danger ml-1'>{errorText}</span>
       )}
