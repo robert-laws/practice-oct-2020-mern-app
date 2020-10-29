@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 
 export const Button = ({
   children,
+  buttonFunction,
+  id,
+  size = 'medium',
   color = 'primary',
   disabled = false,
   type = 'button',
@@ -30,12 +33,33 @@ export const Button = ({
     }
   };
 
+  const buttonSize = (size) => {
+    switch (size) {
+      case 'small':
+        return 'is-small';
+
+      case 'normal':
+        return 'is-fullwidth';
+
+      case 'medium':
+        return 'is-medium';
+
+      case 'large':
+        return 'is-large';
+
+      default:
+        return 'is-medium';
+    }
+  };
+
   const buttonElement =
     linkTo === '' ? (
       <button
+        id={id}
         type={type}
-        className={`button ${buttonColor(color)}`}
+        className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)}`}
         disabled={disabled}
+        onClick={buttonFunction}
       >
         {children}
       </button>
@@ -43,7 +67,7 @@ export const Button = ({
       <Link to={linkTo}>
         <button
           type={type}
-          className={`button ${buttonColor(color)}`}
+          className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)}`}
           disabled={disabled}
         >
           {children}

@@ -10,14 +10,29 @@ export const AllItems = () => {
     return <div>Loading...</div>;
   }
 
+  const deleteItem = (event) => {
+    console.log(event.target.id);
+  };
+
   return (
     <div className='container'>
       <HeadingText text='All Items' />
       <hr />
       {technologyData &&
         technologyData.map((item) => (
-          <div key={item.id}>
-            {item.title} <Button linkTo={`/items/${item.id}`}>Edit</Button>
+          <div key={item.id} className='my-4'>
+            {item.title}{' '}
+            <Button linkTo={`/items/${item.id}`} size='small' color='info'>
+              Edit
+            </Button>
+            <Button
+              id={item.id}
+              size='small'
+              color='danger'
+              buttonFunction={deleteItem}
+            >
+              Delete
+            </Button>
           </div>
         ))}
     </div>
