@@ -10,7 +10,7 @@ export const AllItems = () => {
     return <div>Loading...</div>;
   }
 
-  const deleteItem = (event) => {
+  const handleDeleteItem = (event) => {
     console.log(event.target.id);
   };
 
@@ -29,7 +29,7 @@ export const AllItems = () => {
               id={item.id}
               size='small'
               color='danger'
-              buttonFunction={deleteItem}
+              buttonFunction={handleDeleteItem}
             >
               Delete
             </Button>
