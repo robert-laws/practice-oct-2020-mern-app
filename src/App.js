@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.scss';
 import { Footer, Navigation } from './layout';
-import { Home, AllItems, AddItem, UpdateItem, Login } from './pages';
+import { Home, AllItems, AddItem, UpdateItem, Login, SignUp } from './pages';
 import { Detail, List } from './components';
 import TechnologyContext from './context/technology/technologyContext';
 
@@ -25,6 +25,7 @@ const App = () => {
       <section className='section' style={{ flex: '1' }}>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/signup' component={SignUp} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/items' component={AllItems} />
           <Route exact path='/items/new' component={AddItem} />

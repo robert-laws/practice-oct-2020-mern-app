@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeadingText, Button, Input } from '../components';
+import { HeadingText, Input, Button } from '../components';
 import {
   validatorMinLength,
   validatorRequire,
@@ -7,9 +7,13 @@ import {
 } from '../util/utilities';
 import { useForm } from '../hooks/form';
 
-export const Login = () => {
+export const SignUp = () => {
   const [formState, inputHandler] = useForm(
     {
+      name: {
+        value: '',
+        isValid: false,
+      },
       email: {
         value: '',
         isValid: false,
@@ -30,9 +34,18 @@ export const Login = () => {
 
   return (
     <div className='container'>
-      <HeadingText text='Login' />
+      <HeadingText text='Sign Up' />
       <hr />
       <form onSubmit={handleSubmit}>
+        <Input
+          id='name'
+          label='Name'
+          element='text'
+          placeholder='Enter your Name'
+          validators={[validatorRequire()]}
+          errorText='Please enter a valid name'
+          onInput={inputHandler}
+        />
         <Input
           id='email'
           label='Email'
@@ -53,13 +66,10 @@ export const Login = () => {
         />
         <Button
           color='primary'
-          size='medium'
+          size='normal'
           type='submit'
           disabled={!formState.isValid}
         >
-          Login
-        </Button>
-        <Button linkTo='/signup' color='info' size='medium'>
           Sign Up
         </Button>
       </form>

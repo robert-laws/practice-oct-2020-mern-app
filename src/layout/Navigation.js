@@ -76,6 +76,14 @@ export const Navigation = () => {
           >
             Login
           </NavLink>
+          <NavLink
+            exact
+            to='/signup'
+            className='navbar-item'
+            activeClassName='is-active'
+          >
+            Sign Up
+          </NavLink>
         </div>
       </div>
     </nav>
