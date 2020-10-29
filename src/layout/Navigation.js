@@ -68,6 +68,14 @@ export const Navigation = () => {
           >
             Add a New Item
           </NavLink>
+          <NavLink
+            exact
+            to='/login'
+            className='navbar-item'
+            activeClassName='is-active'
+          >
+            Login
+          </NavLink>
         </div>
       </div>
     </nav>
