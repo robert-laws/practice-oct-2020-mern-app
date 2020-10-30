@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { HeadingText, Button, Input } from '../components';
 import {
   validatorMinLength,
@@ -6,8 +7,14 @@ import {
   validatorEmail,
 } from '../util/utilities';
 import { useForm } from '../hooks/form';
+import AuthContext from '../context/auth/authContext';
 
 export const Login = () => {
+  let history = useHistory();
+
+  const authContext = useContext(AuthContext);
+  const { login } = authContext;
+
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -25,7 +32,8 @@ export const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(formState.inputs);
+    login();
+    history.push('/items');
   };
 
   return (

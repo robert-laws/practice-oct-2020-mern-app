@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { NavLink, Link, useHistory } from 'react-router-dom';
+import { Button } from '../components';
 import Logo from '../images/logo.svg';
+import AuthContext from '../context/auth/authContext';
 
 export const Navigation = () => {
+  let history = useHistory();
+
+  const authContext = useContext(AuthContext);
+  const { isLoggedIn, logout } = authContext;
+
   const [toggle, setToggle] = useState(false);
 
   const showMobile = () => {
     setToggle((prev) => !prev);
+  };
+
+  const doLogout = () => {
+    logout();
+    history.push('/');
   };
 
   return (
@@ -52,38 +64,51 @@ export const Navigation = () => {
           >
             Learning
           </NavLink>
-          <NavLink
-            exact
-            to='/items'
-            className='navbar-item'
-            activeClassName='is-active'
-          >
-            All Items
-          </NavLink>
-          <NavLink
-            exact
-            to='/items/new'
-            className='navbar-item'
-            activeClassName='is-active'
-          >
-            Add a New Item
-          </NavLink>
-          <NavLink
-            exact
-            to='/login'
-            className='navbar-item'
-            activeClassName='is-active'
-          >
-            Login
-          </NavLink>
-          <NavLink
-            exact
-            to='/signup'
-            className='navbar-item'
-            activeClassName='is-active'
-          >
-            Sign Up
-          </NavLink>
+          {isLoggedIn && (
+            <NavLink
+              exact
+              to='/items'
+              className='navbar-item'
+              activeClassName='is-active'
+            >
+              All Items
+            </NavLink>
+          )}
+          {isLoggedIn && (
+            <NavLink
+              exact
+              to='/items/new'
+              className='navbar-item'
+              activeClassName='is-active'
+            >
+              Add a New Item
+            </NavLink>
+          )}
+          {!isLoggedIn && (
+            <NavLink
+              exact
+              to='/login'
+              className='navbar-item'
+              activeClassName='is-active'
+            >
+              Login
+            </NavLink>
+          )}
+          {!isLoggedIn && (
+            <NavLink
+              exact
+              to='/signup'
+              className='navbar-item'
+              activeClassName='is-active'
+            >
+              Sign Up
+            </NavLink>
+          )}
+          {isLoggedIn && (
+            <Button id='logout' buttonFunction={doLogout}>
+              Logout
+            </Button>
+          )}
         </div>
       </div>
     </nav>
