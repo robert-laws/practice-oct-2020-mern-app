@@ -61,13 +61,13 @@ export const Login = () => {
         />
         <Button
           color='primary'
-          size='medium'
+          size='normal'
           type='submit'
           disabled={!formState.isValid}
         >
           Login
         </Button>
-        <Button linkTo='/signup' color='info' size='medium'>
+        <Button linkTo='/signup' color='info' size='normal'>
           Sign Up
         </Button>
       </form>

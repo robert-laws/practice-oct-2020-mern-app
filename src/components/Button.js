@@ -7,6 +7,7 @@ export const Button = ({
   id,
   size = 'medium',
   color = 'primary',
+  outlined = false,
   disabled = false,
   type = 'button',
   linkTo = '',
@@ -28,6 +29,9 @@ export const Button = ({
       case 'danger':
         return 'is-danger';
 
+      case 'light':
+        return 'is-light';
+
       default:
         return 'is-primary';
     }
@@ -38,7 +42,7 @@ export const Button = ({
       case 'small':
         return 'is-small';
 
-      case 'normal':
+      case 'full-width':
         return 'is-fullwidth';
 
       case 'medium':
@@ -47,8 +51,11 @@ export const Button = ({
       case 'large':
         return 'is-large';
 
+      case 'normal':
+        return 'is-normal';
+
       default:
-        return 'is-medium';
+        return 'is-normal';
     }
   };
 
@@ -57,7 +64,9 @@ export const Button = ({
       <button
         id={id}
         type={type}
-        className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)}`}
+        className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)} ${
+          outlined && 'is-outlined'
+        }`}
         disabled={disabled}
         onClick={buttonFunction}
       >
@@ -67,7 +76,9 @@ export const Button = ({
       <Link to={linkTo}>
         <button
           type={type}
-          className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)}`}
+          className={`button mx-1 ${buttonColor(color)} ${buttonSize(size)} ${
+            outlined && 'is-outlined'
+          }`}
           disabled={disabled}
         >
           {children}

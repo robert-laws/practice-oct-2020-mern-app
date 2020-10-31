@@ -66,7 +66,7 @@ export const SignUp = () => {
         />
         <Button
           color='primary'
-          size='normal'
+          size='full-width'
           type='submit'
           disabled={!formState.isValid}
         >

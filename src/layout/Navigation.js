@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import { NavLink, Link, useHistory, useLocation } from 'react-router-dom';
 import { Button } from '../components';
 import Logo from '../images/logo.svg';
 import AuthContext from '../context/auth/authContext';
 
 export const Navigation = () => {
   let history = useHistory();
+  let location = useLocation();
+  console.log(location.pathname.split('/')[1]);
 
   const authContext = useContext(AuthContext);
   const { isLoggedIn, logout } = authContext;
@@ -38,12 +40,21 @@ export const Navigation = () => {
           <span></span>
         </a>
       </div>
-      <div className={`navbar-menu ${toggle && ' is-active'}`}>
+      <div
+        className={`navbar-menu is-align-items-center ${
+          toggle && ' is-active'
+        }`}
+      >
         <div className='navbar-start'>
           <NavLink
             exact
             to='/equipment'
-            className='navbar-item'
+            isActive={() => {
+              if (location && location.pathname.split('/')[1] === 'equipment') {
+                return true;
+              }
+            }}
+            className='navbar-item mr-2'
             activeClassName='is-active'
           >
             Equipment
@@ -51,7 +62,12 @@ export const Navigation = () => {
           <NavLink
             exact
             to='/software'
-            className='navbar-item'
+            isActive={() => {
+              if (location && location.pathname.split('/')[1] === 'software') {
+                return true;
+              }
+            }}
+            className='navbar-item mr-2'
             activeClassName='is-active'
           >
             Software
@@ -59,7 +75,12 @@ export const Navigation = () => {
           <NavLink
             exact
             to='/learning'
-            className='navbar-item'
+            isActive={() => {
+              if (location && location.pathname.split('/')[1] === 'learning') {
+                return true;
+              }
+            }}
+            className='navbar-item mr-2'
             activeClassName='is-active'
           >
             Learning
@@ -68,7 +89,7 @@ export const Navigation = () => {
             <NavLink
               exact
               to='/items'
-              className='navbar-item'
+              className='navbar-item mr-2'
               activeClassName='is-active'
             >
               All Items
@@ -78,17 +99,19 @@ export const Navigation = () => {
             <NavLink
               exact
               to='/items/new'
-              className='navbar-item'
+              className='navbar-item mr-2'
               activeClassName='is-active'
             >
               Add a New Item
             </NavLink>
           )}
+        </div>
+        <div className='navbar-end mr-4'>
           {!isLoggedIn && (
             <NavLink
               exact
               to='/login'
-              className='navbar-item'
+              className='navbar-item button mr-2'
               activeClassName='is-active'
             >
               Login
@@ -98,14 +121,20 @@ export const Navigation = () => {
             <NavLink
               exact
               to='/signup'
-              className='navbar-item'
+              className='navbar-item button'
               activeClassName='is-active'
             >
               Sign Up
             </NavLink>
           )}
           {isLoggedIn && (
-            <Button id='logout' buttonFunction={doLogout}>
+            <Button
+              id='logout'
+              size='normal'
+              color='info'
+              outlined
+              buttonFunction={doLogout}
+            >
               Logout
             </Button>
           )}
