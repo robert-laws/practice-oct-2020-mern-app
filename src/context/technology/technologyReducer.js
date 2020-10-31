@@ -17,7 +17,9 @@ export default (state, action) => {
     case UPDATE_ITEM:
       return {
         ...state,
-        technologyData: [...state.technologyData, action.payload],
+        technologyData: state.technologyData.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        ),
       };
 
     case DELETE_ITEM:

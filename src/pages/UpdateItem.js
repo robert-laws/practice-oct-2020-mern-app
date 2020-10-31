@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import TechnologyContext from '../context/technology/technologyContext';
 import { HeadingText, Input, Button, Select } from '../components';
 import { validatorRequire } from '../util/utilities';
@@ -7,10 +7,12 @@ import { useForm } from '../hooks/form';
 
 export const UpdateItem = () => {
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData } = technologyContext;
+  const { technologyData, updateItem } = technologyContext;
 
   const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  let history = useHistory();
 
   const { id } = useParams();
 
@@ -72,7 +74,16 @@ export const UpdateItem = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(formState.inputs);
+    const updatedItem = {
+      id: id,
+      title: formState.inputs.title.value,
+      description: formState.inputs.description.value,
+      group: formState.inputs.group.value,
+    };
+
+    updateItem(updatedItem);
+
+    history.push(`/${formState.inputs.group.value}/${id}`);
   };
 
   if (loading) {

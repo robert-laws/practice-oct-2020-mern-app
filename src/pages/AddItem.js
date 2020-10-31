@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, HeadingText, Input, Select } from '../components';
 import { validatorMinLength, validatorRequire } from '../util/utilities';
 import { useForm } from '../hooks/form';
+import TechnologyContext from '../context/technology/technologyContext';
 
 export const AddItem = () => {
+  const technologyContext = useContext(TechnologyContext);
+  const { addItem } = technologyContext;
+
+  let history = useHistory();
+
   const [formState, inputHandler] = useForm(
     {
       title: {
@@ -25,7 +32,16 @@ export const AddItem = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(formState.inputs);
+    const newItem = {
+      id: Math.floor(Math.random() * 1000).toString(),
+      title: formState.inputs.title.value,
+      description: formState.inputs.description.value,
+      group: formState.inputs.group.value,
+    };
+
+    addItem(newItem);
+
+    history.push('/items');
   };
 
   return (

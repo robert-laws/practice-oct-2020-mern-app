@@ -7,7 +7,6 @@ import AuthContext from '../context/auth/authContext';
 export const Navigation = () => {
   let history = useHistory();
   let location = useLocation();
-  console.log(location.pathname.split('/')[1]);
 
   const authContext = useContext(AuthContext);
   const { isLoggedIn, logout } = authContext;

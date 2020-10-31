@@ -31,7 +31,7 @@ const TechnologyState = ({ children }) => {
   );
 
   const updateItem = useCallback(
-    (id, item) => {
+    (item) => {
       try {
         dispatch({ type: UPDATE_ITEM, payload: item });
       } catch (error) {
