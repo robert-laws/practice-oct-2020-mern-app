@@ -4,14 +4,14 @@ import TechnologyContext from '../context/technology/technologyContext';
 
 export const AllItems = () => {
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData } = technologyContext;
+  const { technologyData, deleteItem } = technologyContext;
 
   if (!technologyData) {
     return <div>Loading...</div>;
   }
 
   const handleDeleteItem = (event) => {
-    console.log(event.target.id);
+    deleteItem(event.target.id);
   };
 
   return (

@@ -41,9 +41,12 @@ export const List = () => {
     <div className='container'>
       <HeadingText text={group.toUpperCase()} />
       {groupData &&
+        groupData.length > 0 &&
         groupData.map((item) => (
           <ListItem key={item.id} group={group} item={item} />
         ))}
+
+      {groupData && groupData.length === 0 && <p>No Items Listed</p>}
     </div>
   );
 };
