@@ -37,7 +37,7 @@ export const Detail = () => {
     );
   }
 
-  if (!technologyItem) {
+  if (!technologyItem || technologyItem.group !== group) {
     return (
       <div className='container'>
         <p>Item not found</p>
