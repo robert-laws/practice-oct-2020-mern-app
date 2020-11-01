@@ -5,7 +5,7 @@ import { LOGIN, LOGOUT } from '../types';
 
 const AuthState = ({ children }) => {
   const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);

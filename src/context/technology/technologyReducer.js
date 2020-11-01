@@ -4,6 +4,7 @@ import {
   ADD_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
+  CLEAR_ITEM,
 } from '../types';
 
 export default (state, action) => {
@@ -18,7 +19,7 @@ export default (state, action) => {
       return {
         ...state,
         technologyItem: state.technologyData.find(
-          (item) => item.id === action.payload
+          (item) => item.id.toString() === action.payload
         ),
       };
 
@@ -42,6 +43,12 @@ export default (state, action) => {
         technologyData: state.technologyData.filter(
           (item) => item.id !== action.payload
         ),
+      };
+
+    case CLEAR_ITEM:
+      return {
+        ...state,
+        technologyItem: null,
       };
 
     default:

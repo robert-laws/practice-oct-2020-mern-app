@@ -14,7 +14,11 @@ export const List = () => {
   const [loading, setLoading] = useState(true);
 
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData } = technologyContext;
+  const { technologyData, clearItem } = technologyContext;
+
+  useEffect(() => {
+    clearItem();
+  }, [clearItem]);
 
   useEffect(() => {
     if (group) {

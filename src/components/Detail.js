@@ -9,11 +9,10 @@ export const Detail = () => {
 
   const { group, id } = useParams();
 
-  const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData } = technologyContext;
+  const { technologyData, technologyItem, getItemById } = technologyContext;
 
   useEffect(() => {
     if (group) {
@@ -24,23 +23,11 @@ export const Detail = () => {
   }, [group, history]);
 
   useEffect(() => {
-    if (technologyData && group && id) {
-      const data = technologyData.find((item) => {
-        if (item.group === group) {
-          return item.id.toString() === id;
-        } else {
-          return undefined;
-        }
-      });
-
-      if (data === undefined) {
-        history.push('/');
-      }
-
-      setDetailData(data);
+    if (technologyData && id) {
+      getItemById(id);
       setLoading(false);
     }
-  }, [technologyData, group, id, history]);
+  }, [technologyData, getItemById, id]);
 
   if (loading) {
     return (
@@ -50,10 +37,22 @@ export const Detail = () => {
     );
   }
 
+  if (!technologyItem) {
+    return (
+      <div className='container'>
+        <p>Item not found</p>
+      </div>
+    );
+  }
+
   return (
     <div className='container'>
-      <HeadingText text={detailData.title.toUpperCase()} />
-      <p>{detailData.description}</p>
+      {technologyItem && (
+        <>
+          <HeadingText text={technologyItem.title.toUpperCase()} />
+          <p>{technologyItem.description}</p>
+        </>
+      )}
     </div>
   );
 };

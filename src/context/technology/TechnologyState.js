@@ -7,6 +7,7 @@ import {
   ADD_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
+  CLEAR_ITEM,
 } from '../types';
 import data from '../../data/allData';
 
@@ -70,6 +71,14 @@ const TechnologyState = ({ children }) => {
     [dispatch]
   );
 
+  const clearItem = useCallback(() => {
+    try {
+      dispatch({ type: CLEAR_ITEM });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
   return (
     <TechnologyContext.Provider
       value={{
@@ -80,6 +89,7 @@ const TechnologyState = ({ children }) => {
         addItem,
         updateItem,
         deleteItem,
+        clearItem,
       }}
     >
       {children}

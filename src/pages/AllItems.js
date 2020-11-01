@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { HeadingText, Button } from '../components';
 import TechnologyContext from '../context/technology/technologyContext';
 
 export const AllItems = () => {
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData, deleteItem } = technologyContext;
+  const { technologyData, deleteItem, clearItem } = technologyContext;
+
+  useEffect(() => {
+    clearItem();
+  }, [clearItem]);
 
   if (!technologyData) {
     return <div>Loading...</div>;

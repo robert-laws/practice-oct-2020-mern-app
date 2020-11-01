@@ -7,9 +7,13 @@ import { useForm } from '../hooks/form';
 
 export const UpdateItem = () => {
   const technologyContext = useContext(TechnologyContext);
-  const { technologyData, updateItem } = technologyContext;
+  const {
+    technologyData,
+    technologyItem,
+    getItemById,
+    updateItem,
+  } = technologyContext;
 
-  const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   let history = useHistory();
@@ -35,19 +39,25 @@ export const UpdateItem = () => {
   );
 
   useEffect(() => {
-    if (detailData) {
+    if (technologyData) {
+      getItemById(id);
+    }
+  }, [technologyData, getItemById, id]);
+
+  useEffect(() => {
+    if (technologyItem) {
       setFormData(
         {
           title: {
-            value: detailData.title,
+            value: technologyItem.title,
             isValid: true,
           },
           description: {
-            value: detailData.description,
+            value: technologyItem.description,
             isValid: true,
           },
           group: {
-            value: detailData.group,
+            value: technologyItem.group,
             isValid: true,
           },
         },
@@ -56,20 +66,7 @@ export const UpdateItem = () => {
 
       setLoading(false);
     }
-  }, [detailData, setFormData]);
-
-  useEffect(() => {
-    if (technologyData) {
-      const data = technologyData.find((item) => {
-        return item.id.toString() === id;
-      });
-
-      if (data) {
-        setDetailData(data);
-        // setLoading(false);
-      }
-    }
-  }, [technologyData, id]);
+  }, [technologyItem, setFormData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
