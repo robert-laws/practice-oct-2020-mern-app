@@ -1,12 +1,19 @@
 import React, { useReducer, useCallback } from 'react';
 import TechnologyContext from './technologyContext';
 import technologyReducer from './technologyReducer';
-import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../types';
+import {
+  GET_ITEMS,
+  GET_ITEM_BY_ID,
+  ADD_ITEM,
+  UPDATE_ITEM,
+  DELETE_ITEM,
+} from '../types';
 import data from '../../data/allData';
 
 const TechnologyState = ({ children }) => {
   const initialState = {
     technologyData: null,
+    technologyItem: null,
   };
 
   const [state, dispatch] = useReducer(technologyReducer, initialState);
@@ -18,6 +25,17 @@ const TechnologyState = ({ children }) => {
       console.log(error);
     }
   }, [dispatch]);
+
+  const getItemById = useCallback(
+    (id) => {
+      try {
+        dispatch({ type: GET_ITEM_BY_ID, payload: id });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch]
+  );
 
   const addItem = useCallback(
     (item) => {
@@ -56,7 +74,9 @@ const TechnologyState = ({ children }) => {
     <TechnologyContext.Provider
       value={{
         technologyData: state.technologyData,
+        technologyItem: state.technologyItem,
         getAllTechnologyData,
+        getItemById,
         addItem,
         updateItem,
         deleteItem,

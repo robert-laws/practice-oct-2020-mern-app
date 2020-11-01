@@ -1,4 +1,10 @@
-import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../types';
+import {
+  GET_ITEMS,
+  GET_ITEM_BY_ID,
+  ADD_ITEM,
+  UPDATE_ITEM,
+  DELETE_ITEM,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,6 +12,14 @@ export default (state, action) => {
       return {
         ...state,
         technologyData: action.payload,
+      };
+
+    case GET_ITEM_BY_ID:
+      return {
+        ...state,
+        technologyItem: state.technologyData.find(
+          (item) => item.id === action.payload
+        ),
       };
 
     case ADD_ITEM:
