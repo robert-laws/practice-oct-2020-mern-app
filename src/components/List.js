@@ -34,7 +34,11 @@ export const List = () => {
   }, [technologyData, group]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className='container'>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
